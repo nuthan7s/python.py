@@ -1,0 +1,23 @@
+def to_decimal(value, base):
+return int(value, base)
+
+def from_decimal(num, base):
+digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+ result = ""
+
+    while num > 0:
+result = digits[num % base] + result
+        num = num // base
+
+return result
+
+print("NUMBER SYSTEM CONVERTER")
+
+number = input("Enter the number: ").upper()
+base_from = int(input("Enter original base: "))
+base_to = int(input("Enter base to convert to: "))
+
+decimal = to_decimal(number, base_from)
+final = from_decimal(decimal, base_to)
+
+print("Converted number:", final)
