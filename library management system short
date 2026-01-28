@@ -1,0 +1,88 @@
+from datetime import datetime, timedelta
+
+class Book:
+    def __init__(self, t, a):
+        self.title, self.author = t, a
+        self.available = True
+        self.issue = self.due = None
+
+
+library = [
+    Book("The Alchemist","Paulo Coelho"),
+    Book("To Kill a Mockingbird","Harper Lee"),
+    Book("The Hobbit","J. R. R. Tolkien"),
+    Book("1984","George Orwell"),
+    Book("Harry Potter and the Sorcerer's Stone","J.K. Rowling"),
+    Book("Dune","Frank Herbert"),
+    Book("Gone Girl","Gillian Flynn"),
+    Book("And Then There Were None","Agatha Christie"),
+    Book("The Da Vinci Code","Dan Brown"),
+    Book("The Silence of the Lambs","Thomas Harris")
+]
+
+
+def pause(): input("Press Enter to continue...")
+
+def find_book(name):
+    return next((b for b in library if b.title.lower() == name.lower()), None)
+
+
+def add_book():
+    library.append(Book(input("Title: "), input("Author: ")))
+    print("Bk added!"); pause()
+
+
+def display_books():
+    for i, b in enumerate(library, 1):
+        print(f"{i}. {b.title} | {b.author} | {'Available' if b.available else 'Borrowed'}")
+    pause()
+
+
+def borrow_book():
+    b = find_book(input("Book title: "))
+    if b and b.available:
+        b.available, b.issue = False, datetime.now()
+        b.due = b.issue + timedelta(days=7)
+        print("Borrowed! Return before:", b.due.strftime("%d-%m-%Y"))
+    else:
+        print("Book not available!")
+    pause()
+
+
+def return_book():
+    b = find_book(input("Book title: "))
+    if b and not b.available:
+        if datetime.now() > b.due:
+            print("Overdue by", (datetime.now() - b.due).days, "days")
+        b.available = True; b.issue = b.due = None
+        print("Book returned!")
+    else:
+        print("Invalid return!")
+    pause()
+
+
+def overdue():
+    now = datetime.now()
+    found = False
+    for b in library:
+        if not b.available and b.due < now:
+            print(b.title, "| Overdue:", (now - b.due).days, "days")
+            found = True
+    if not found: print("No overdue books.")
+    pause()
+
+
+def main():
+    while True:
+        print("\n1.Add 2.Display 3.Borrow 4.Return 5.Overdue 6.Exit")
+        c = input("Choice: ")
+        if c == "1": add_book()
+        elif c == "2": display_books()
+        elif c == "3": borrow_book()
+        elif c == "4": return_book()
+        elif c == "5": overdue()
+        elif c == "6": print("Exiting..."); break
+        else: print("Invalid choice!")
+
+
+main()
