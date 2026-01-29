@@ -1,0 +1,69 @@
+import random
+
+people = [
+    "Alex", "Sam", "Jordan", "Taylor", "Chris",
+    "Jamie", "Morgan", "Riley", "Casey", "Avery"
+]
+
+truths = [
+    "What is your biggest fear?",
+    "Have you ever lied to your best friend?",
+    "What is your most embarrassing moment?",
+    "Who was your first crush?",
+    "What secret have you never told anyone?",
+    "What is the biggest mistake you have ever made?",
+    "Who do you trust the most in this group?",
+    "What is one thing you regret doing?",
+    "What is your biggest insecurity?",
+    "Have you ever cheated in an exam or game?",
+    "What is something you are afraid to tell your parents?",
+    "Who was the last person you stalked on social media?"
+]
+
+dares = [
+    "Do 15 push-ups.",
+    "Sing a song for 30 seconds.",
+    "Dance without music for one minute.",
+    "Speak in a funny accent for the next two rounds.",
+    "Do your best animal impression.",
+    "Act like a robot for one minute.",
+    "Tell a joke and make everyone laugh.",
+    "Do 20 jumping jacks.",
+    "Pretend to be your favorite movie character.",
+    "Talk without closing your mouth for 30 seconds.",
+    "Balance on one foot for one minute.",
+    "Say the alphabet backwards as fast as you can."
+]
+
+random.shuffle(people)
+
+for person in people:
+    print(f"\nIt's {person}'s turn.")
+    
+    while True:
+        choice = input("Choose Truth or Dare: ").strip().lower()
+        if choice in ["truth", "dare"]:
+            break
+        print("Invalid input. Please type 'truth' or 'dare'.")
+
+    if choice == "truth":
+        print("Truth Question:")
+        print(random.choice(truths))
+    else:
+        print("Dare Challenge:")
+        print(random.choice(dares))
+
+print("\nGame over. Everyone had a turn.")
+
+
+
+output
+It's Avery's turn.
+Choose Truth or Dare: truth
+Truth Question:
+What is your most embarrassing moment?
+
+It's Riley's turn.
+Choose Truth or Dare: dare
+Dare Challenge:
+Do 15 push-ups.
