@@ -1,0 +1,19 @@
+def calculate_bmi(weight, height):
+    return weight / (height ** 2)
+
+weight = float(input())
+height = float(input())
+
+bmi = calculate_bmi(weight, height)
+
+print(f"Your BMI is: {bmi:.2f}")
+
+
+
+
+input:-
+70.0
+1.75
+
+output:-
+your BMI is: 22.86
